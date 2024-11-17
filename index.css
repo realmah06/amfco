@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Host Grotesk", sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1000px;
+}
+.login-container{
+    margin-top: 50px;
+    padding: 10px;
+    height: 50vh;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    width: 700px;
+}
+.login-container .brand{
+    display: flex;
+    align-items: center;
+}
+.login-container .brand img{
+    height: 100px;
+}
+.login-container .brand h1{
+    font-size: 28px;
+    color: darkgreen;
+    text-shadow: 0px 0px 2px rgb(0, 0, 0.1);
+    text-transform: capitalize;
+    text-decoration-line: overline;
+    text-decoration-color: darkred;
+}
+.form-group{
+    margin: 10px;
+}
+.form-group span{
+    display: block;
+    font-size: 17px;
+}
+.form-group input{
+    border: none;
+    font-size: 20px;
+    background-color: transparent;
+    outline: none;
+    padding: 10px;
+}
+.form-group button{
+    padding: 5px;
+    width: 200px;
+    margin-left: -25px;
+    font-size: 18px;
+    margin-top: 50px;
+    border: none;
+    background-color: transparent;
+    color: #ffffff;
+}
+.form-group button:focus{
+    background-color: green;
+}
+footer{
+    text-align: center;
+    bottom: 20px;
+    position: fixed;
+    background-color: #fff;
+    color: #d3456d;
+    font-size: 15px;
+}
+/* Style for the background overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+/* Style for each popup form */
+.popup-form {
+    position: fixed;
+    background-color: white;
+    display: none;
+    padding: 20px;
+    margin-top: 250px;
+    border-radius: 5px;
+    width: 350px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    height: 30vh;
+    animation: slideDown 0.10s ease forwards; /* Animation */
+  }
+
+  /* Style for the close button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+  }
+  .popup-form .alert-btn{
+    padding: 5px 8px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 3px;
+  }
+  /* Loader styles */
+.loader {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Higher than other elements */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.411); /* Semi-transparent overlay */
+    justify-content: center;
+    align-items: center;
+}
+
+.loader::before {
+    content: "";
+    border: 5px solid #f3f3f3; /* Light gray */
+    border-top: 5px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+/* Keyframes for loader animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
