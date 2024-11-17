@@ -643,7 +643,7 @@ function updateCustomerList() {
     customerList.innerHTML = '';
     customers.forEach((customer) => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = `${customer.name} - <small><em>(${customer.address})</em></small> - ${customer.phone}`;
+        listItem.innerHTML = `${customer.name}  <small><em>(${customer.address})</em></small>  ${customer.phone}`;
         customerList.appendChild(listItem);
     });
 }
