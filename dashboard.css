@@ -144,6 +144,9 @@ body{
 .overview p li{
     font-weight: 600;
 }
+.hidden{
+    display: none;
+}
 @media screen and (max-width: 1403px) {
     .row-1{
         display: block;
