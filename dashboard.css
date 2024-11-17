@@ -180,6 +180,9 @@ body{
     .recent{
         display: none;
     }
+    .header .list li span{
+    font-size: 30px;
+    }
     .alt{
         width: 100%;
         margin: 0;
