@@ -180,10 +180,6 @@ body{
     .recent{
         display: none;
     }
-    .content{
-        margin-bottom: 100px;
-        margin-top: 285px;
-    }
     .alt{
         width: 100%;
         margin: 0;
