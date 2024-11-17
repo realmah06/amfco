@@ -114,6 +114,117 @@
     font-weight: bold;
     border-radius: 5px;
 }
+.popup { 
+    display: none;
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: 
+    translate(-50%, -100%); 
+    border-radius: 5px;
+    width: 550px; 
+    padding: 10px; 
+    background: #f9f9f9; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); 
+}
+.popup h2 {
+    margin-top: 0; 
+}
+.popup .close-btn { 
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    cursor: pointer; 
+    color: #333; 
+}
+.overlay { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.5); 
+}
+.popup h2{
+    font-size: 17px;
+}
+.form-group{
+    display: inline-block;
+    margin: 10px;
+}
+.form-group label{
+    display: block;
+}
+.form-group input{
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    font-size: 17px;
+    border-radius: 5px;
+    outline: none;
+}
+.form-group select{
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    font-size: 17px;
+    border-radius: 5px;
+    outline: none;
+}
+.hidden{
+    display: none;
+}
+.hidden .form-group{
+    width: 100%;
+}
+.hidden .form-group select{
+    width: 97%;
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    font-size: 17px;
+    border-radius: 5px;
+    outline: none;
+}
+.form-group textarea {
+    padding: 10px;
+    width: 93%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+}
+.post-btn{
+    padding: 5px 7px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(5, 48, 5);
+    color: #fff;
+    font-size: 17px;
+    margin-right: 30px;
+    border-radius: 2px;
+    margin-top: -5px;
+    float: right;
+}
+.radios{
+    display: block;
+}
+.customer-select {
+    width: 97%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 10px;
+    font-size: 16px;
+}
+.hidden-select select{
+    width: 97%;
+    padding: 7px 10px;
+    border: 1px solid #ddd;
+    font-size: 17px;
+    border-radius: 5px;
+    outline: none;
+}
 @media screen and (max-width: 1590px){
     .modal li{
         font-size: 17px;
@@ -306,6 +417,423 @@
             </div>
           </div>
     </div>
+    <!-- Customer Setup -->
+<div id="popup2" class="popup">
+    <span class="close-btn" onclick="closePopup(2)">&times;</span>
+    <h2>Customer Setup +</h2>
+    <hr>
+    <br>
+    <form id="customer_setup">
+        <div class="optionals">
+            <div class="radios">
+                <input type="radio" name="action" id="add_customer" value="add" checked> <span>Add +</span>
+                <input type="radio" name="action" id="update_customer" value="update"> <span>Update</span>
+                <input type="radio" name="action" id="delete_customer" value="delete"> <span>Delete</span>
+            </div>
+            
+            <!-- Main customer select dropdown -->
+            <div id="customer_select_container" class="hidden-select"></div>
+    
+            <hr style="border: 1px solid green;">
+        </div>
+        <div class="form-group" style="width: 100%;">
+            <label for="customer_name">Customer Name</label>
+            <input type="text" name="customer_name" id="customer_name" placeholder="Customer Name" style="width: 92%;">
+        </div>
+        <div class="form-group" style="width: 100%;">
+            <label for="address">Address</label>
+            <textarea name="customer_address" id="customer_address" placeholder="Address"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="credit_limit">Credit Limit</label>
+            <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+        </div>
+        <div class="form-group">
+            <label for="phone_number">Phone Number</label>
+            <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+        </div>
+    </form>
+    <br>
+    <button type="button" id="save_button" class="post-btn">Save</button>
+</div>
+<!--Supplier Setup-->
+<div id="popup3" class="popup">
+    <span class="close-btn" onclick="closePopup(3)">&times;</span>
+    <h2>Supplier Setup +</h2>
+    <hr>
+    <br>
+   <!-- Registration Form -->
+   <form id="supplier_setup">
+    <div class="optionals">
+        <div class="radios">
+            <input type="radio" name="action" id="add_supplier" value="add" checked> <span>Add +</span>
+            <input type="radio" name="action" id="update_supplier" value="update"> <span>Update</span>
+            <input type="radio" name="action" id="delete_supplier" value="delete"> <span>Delete</span>
+        </div>
+
+        <!-- Main supplier select dropdown -->
+        <div id="main_supplier_select"></div>
+
+        <hr style="border: 1px solid green;">
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label for="supplier_name">Supplier Name</label>
+        <input type="text" name="supplier_name" id="supplier_name" placeholder="Supplier Name" style="width: 92%;">
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label for="supplier_address">Address</label>
+        <textarea name="supplier_address" id="supplier_address" placeholder="Address"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="credit_limit">Credit Limit</label>
+        <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Phone Number</label>
+        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+    </div>
+</form>
+<br>
+<button type="button" id="supplier_button" class="post-btn">Save</button>
+</div>
+
+<!--Bank Setup-->
+<div id="popup4" class="popup">
+    <span class="close-btn" onclick="closePopup(4)">&times;</span>
+    <h2>Bank Setup +</h2>
+    <hr>
+    <br>
+   <!-- Registration Form -->
+   <form id="bank_setup">
+    <div class="optionals">
+        <div class="radios">
+            <input type="radio" name="action" id="add_bank" value="add" checked> <span>Add +</span>
+            <input type="radio" name="action" id="update_bank" value="update"> <span>Update</span>
+            <input type="radio" name="action" id="delete_bank" value="delete"> <span>Delete</span>
+        </div>
+
+        <!-- Main bank select dropdown -->
+        <div id="main_bank_select" class="hidden-select"></div>
+
+        <hr style="border: 1px solid green;">
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label for="bank_name">Bank Name</label>
+        <input type="text" name="bank_name" id="bank_name" placeholder="Bank Name" style="width: 92%;">
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label for="bank_address">Account Name</label>
+        <textarea name="bank_address" id="bank_address" placeholder="Account Name"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="credit_limit">Credit Limit</label>
+        <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Account Number</label>
+        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+    </div>
+</form>
+<br>
+<button type="button" id="bank_button" class="post-btn">Save</button>
+</div>
+
+
+<!--company Setup-->
+<div id="popup5" class="popup">
+    <span class="close-btn" onclick="closePopup(5)">&times;</span>
+    <h2>Company Setup +</h2>
+    <hr>
+    <br>
+   <!-- Registration Form -->
+   <form id="company">
+    <div class="optionals">
+        <div class="radios">
+            <input type="radio" name="action" id="add_company" value="add" checked> <span>Add +</span>
+            <input type="radio" name="action" id="update_company" value="update"> <span>Update</span>
+            <input type="radio" name="action" id="delete_company" value="delete"> <span>Delete</span>
+        </div>
+
+        <!-- Main company select dropdown -->
+        <div id="main_company_select" class="hidden-select"></div>
+
+        <hr style="border: 1px solid green;">
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label for="company_name">Company Name</label>
+        <input type="text" name="company_name" id="company_name" placeholder="Company Name" style="width: 92%;">
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label for="company_address">Company Name</label>
+        <textarea name="company_address" id="company_address" placeholder="Address"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="credit_limit">Credit Limit</label>
+        <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Number</label>
+        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+    </div>
+</form>
+<br>
+<button type="button" id="company_button" class="post-btn">Save</button>
+</div>
+
+<!--Dependent Supplier Setup-->
+<div class="popup" id="popup6">
+    <span class="close-btn" onclick="closePopup(6)">&times;</span>
+    <h2>Dependent Supplier Setup +</h2>
+    <hr>
+    <br>
+   <!-- Registration Form -->
+   <form id="dependent">
+    <div class="optionals">
+        <div class="radios">
+            <input type="radio" name="action" id="add_dependent" value="add" checked> <span>Add +</span>
+            <input type="radio" name="action" id="update_dependent" value="update"> <span>Update</span>
+            <input type="radio" name="action" id="delete_dependent" value="delete"> <span>Delete</span>
+        </div>
+
+        <!-- Main dependent select dropdown -->
+        <div id="main_dependent_select" class="hidden-select"></div>
+
+        <hr style="border: 1px solid green;">
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label for="dependent_name">Dependent Name</label>
+        <input type="text" name="dependent_name" id="dependent_name" placeholder="Dependent Name" style="width: 92%;">
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label for="dependent_address">Address</label>
+        <textarea name="dependent_address" id="dependent_address" placeholder="Address"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="credit_limit">Credit Limit</label>
+        <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Number</label>
+        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+    </div>
+</form>
+<br>
+<button type="button" id="dependent_button" class="post-btn">Save</button>
+</div>
+
+<!--Independent Supplier Setup-->
+<div class="popup" id="popup7">
+    <span class="close-btn" onclick="closePopup(7)">&times;</span>
+    <h2>Independent Supplier Setup +</h2>
+    <hr>
+    <br>
+   <!-- Registration Form -->
+   <form id="independent">
+    <div class="optionals">
+        <div class="radios">
+            <input type="radio" name="action" id="add_independent" value="add" checked> <span>Add +</span>
+            <input type="radio" name="action" id="update_independent" value="update"> <span>Update</span>
+            <input type="radio" name="action" id="delete_independent" value="delete"> <span>Delete</span>
+        </div>
+
+        <!-- Main independent select dropdown -->
+        <div id="main_independent_select" class="hidden-select"></div>
+
+        <hr style="border: 1px solid green;">
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label for="independent_name">Independent Name</label>
+        <input type="text" name="independent_name" id="independent_name" placeholder="Inependent Name" style="width: 92%;">
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label for="independent_address">Address</label>
+        <textarea name="independent_address" id="independent_address" placeholder="Address"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="credit_limit">Credit Limit</label>
+        <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Number</label>
+        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+    </div>
+</form>
+<br>
+<button type="button" id="independent_button" class="post-btn">Save</button>
+</div>
+
+<!--Investor Setup-->
+<div class="popup" id="popup8">
+    <span class="close-btn" onclick="closePopup(8)">&times;</span>
+    <h2>Investor Setup +</h2>
+    <hr>
+    <br>
+   <!-- Registration Form -->
+   <form id="investor">
+    <div class="optionals">
+        <div class="radios">
+            <input type="radio" name="action" id="add_investor" value="add" checked> <span>Add +</span>
+            <input type="radio" name="action" id="update_investor" value="update"> <span>Update</span>
+            <input type="radio" name="action" id="delete_investor" value="delete"> <span>Delete</span>
+        </div>
+
+        <!-- Main investor select dropdown -->
+        <div id="main_investor_select" class="hidden-select"></div>
+
+        <hr style="border: 1px solid green;">
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label for="investor_name">Investor Name</label>
+        <input type="text" name="investor_name" id="investor_name" placeholder="Investor Name" style="width: 92%;">
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label for="investor_address">Address</label>
+        <textarea name="investor_address" id="investor_address" placeholder="Address"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="credit_limit">Credit Limit</label>
+        <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Number</label>
+        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+    </div>
+</form>
+<br>
+<button type="button" id="investor_button" class="post-btn">Save</button>
+</div>
+
+<!--Transporter Setup-->
+<div class="popup" id="popup9">
+    <span class="close-btn" onclick="closePopup(9)">&times;</span>
+    <h2>Transporter Setup +</h2>
+    <hr>
+    <br>
+   <!-- Registration Form -->
+   <form id="transporter">
+    <div class="optionals">
+        <div class="radios">
+            <input type="radio" name="action" id="add_transporter" value="add" checked> <span>Add +</span>
+            <input type="radio" name="action" id="update_transporter" value="update"> <span>Update</span>
+            <input type="radio" name="action" id="delete_transporter" value="delete"> <span>Delete</span>
+        </div>
+
+        <!-- Main transporter select dropdown -->
+        <div id="main_transporter_select" class="hidden-select"></div>
+
+        <hr style="border: 1px solid green;">
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label for="transporter_name">Transporter Name</label>
+        <input type="text" name="transporter_name" id="transporter_name" placeholder="Transporter Name" style="width: 92%;">
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label for="transporter_address">Address</label>
+        <textarea name="transporter_address" id="transporter_address" placeholder="Address"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="credit_limit">Credit Limit</label>
+        <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Number</label>
+        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+    </div>
+</form>
+<br>
+<button type="button" id="transporter_button" class="post-btn">Save</button>
+</div>
+
+<!--M A Mujaheed Setup-->
+<div class="popup" id="popup10">
+    <span class="close-btn" onclick="closePopup(10)">&times;</span>
+    <h2>M A Mujaheed Setup +</h2>
+    <hr>
+    <br>
+   <!-- Registration Form -->
+   <form id="mamujaheed">
+    <div class="optionals">
+        <div class="radios">
+            <input type="radio" name="action" id="add_mamujaheed" value="add" checked> <span>Add +</span>
+            <input type="radio" name="action" id="update_mamujaheed" value="update"> <span>Update</span>
+            <input type="radio" name="action" id="delete_mamujaheed" value="delete"> <span>Delete</span>
+        </div>
+
+        <!-- Main mamujaheed select dropdown -->
+        <div id="main_mamujaheed_select" class="hidden-select"></div>
+
+        <hr style="border: 1px solid green;">
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label for="mamujaheed_name">Name</label>
+        <input type="text" name="mamujaheed_name" id="mamujaheed_name" placeholder=" Name" style="width: 92%;">
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label for="mamujaheed_address">Address</label>
+        <textarea name="mamujaheed_address" id="mamujaheed_address" placeholder="Address"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="credit_limit">Credit Limit</label>
+        <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Number</label>
+        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+    </div>
+</form>
+<br>
+<button type="button" id="mamujaheed_button" class="post-btn">Save</button>
+</div>
+
+<!--Profit Setup-->
+<div class="popup" id="popup11">
+    <span class="close-btn" onclick="closePopup(11)">&times;</span>
+    <h2>Profit Setup +</h2>
+    <hr>
+    <br>
+   <!-- Registration Form -->
+   <form id="profit">
+    <div class="optionals">
+        <div class="radios">
+            <input type="radio" name="action" id="add_profit" value="add" checked> <span>Add +</span>
+            <input type="radio" name="action" id="update_profit" value="update"> <span>Update</span>
+            <input type="radio" name="action" id="delete_profit" value="delete"> <span>Delete</span>
+        </div>
+
+        <!-- Main profit select dropdown -->
+        <div id="main_profit_select" class="hidden-select"></div>
+
+        <hr style="border: 1px solid green;">
+    </div>
+
+    <div class="form-group" style="width: 100%;">
+        <label for="profit_name">Profit Name</label>
+        <input type="text" name="profit_name" id="profit_name" placeholder="Profit Name" style="width: 92%;">
+    </div>
+    <div class="form-group" style="width: 100%;">
+        <label for="profit_address">Address</label>
+        <textarea name="profit_address" id="profit_address" placeholder="Address"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="credit_limit">Credit Limit</label>
+        <input type="text" name="credit_limit" id="credit_limit" placeholder="Credit Limit">
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Number</label>
+        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number">
+    </div>
+</form>
+<br>
+<button type="button" id="profit_button" class="post-btn">Save</button>
+</div>
     <script src="js/balances.js"></script>
   <script>
     function filterSuppliers() {
@@ -378,6 +906,7 @@ function filterAsset(){
     })
 }
 
+      // Profit Handle //
 
   </script>
 </body>
