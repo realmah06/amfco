@@ -176,6 +176,9 @@ body{
         top: 100px;
         position: fixed;
     }
+    .list li{
+        display: block;
+    }
     .recent{
         display: none;
     }
