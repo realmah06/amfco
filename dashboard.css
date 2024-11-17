@@ -1,0 +1,184 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Host Grotesk", sans-serif;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    top: 0;
+    position: fixed;
+    background-color: #fff;
+}
+.header .image img{
+    height: 60px;
+    margin: 10px;
+    cursor: pointer;
+}
+.header .list li{
+    cursor: pointer;
+    align-items: center;
+    display: inline;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+    padding: 5px;
+    margin: -10px 15px;
+}
+.header .list li span{
+    padding: 5px;
+}
+.header .list li span:hover{
+    color: red;
+    border-radius: 7px;
+    border: 2px solid red;
+}
+.header .list li span{
+    font-size: 35px;
+}
+#active{
+    color: red;
+    border-radius: 7px;
+    border: 2px solid red;
+}
+.content{
+    background-color: rgb(237, 246, 247);
+    margin-top: 85px;
+    padding: 10px;
+    height: 88.8lvh;
+}
+.row-1{
+    display: flex;
+    justify-content: center;
+}
+.row-1 .box{
+    display: inline-block;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px rgb(0, 0, 0.5);
+    min-width: 250px;
+    margin: 15px;
+}
+.row-1 .box .box-header{
+    display: flex;
+    justify-content: space-between;
+}
+.row-1 .box .box-header small{
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: green;
+    font-size: 17px;
+}
+.row-1 .box .box-header span{
+    font-size: 30px;
+}
+.row-1 .box p{
+    color: #acaaaa;
+    font-size: 17px;
+    font-weight: bold;
+}
+.row-1 .box h1{
+    font-size: 25px;
+    text-shadow: 0px 0px 2px darkred;
+}
+.boxes{
+    padding: 7px;
+    background-color: rgb(215, 239, 241);
+    border: 1px solid #ddd;
+    margin: 7px;
+    font-size: 17px;
+    border-radius: 5px;
+    min-width: 310px;
+}
+.row-2{
+    display: flex;
+    justify-content: center;
+}
+.alt{
+    width: 390px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px;
+}
+.alt p{
+    color: #929090;
+}
+.recent{
+    display: flex;
+    justify-content: center;
+}
+.activities{
+    width: 1370px;
+    padding: 10px 20px;
+}
+.activities h1{
+    font-size: 25px;
+    color: #929090;
+}
+.activities table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.activities table th, td{
+    background-color: #fff;
+    padding: 10px 7px;
+    text-align: center;
+}
+.activities table tbody{
+    border-radius: 5px;
+}
+.overview{
+    height: 3vh;
+    margin: 10px;
+    background: linear-gradient(to right, red 50%, green 50%);
+    border-radius: 5px;
+}
+.overview p li{
+    font-weight: 600;
+}
+@media screen and (max-width: 1403px) {
+    .row-1{
+        display: block;
+    }
+}
+@media screen and (max-width: 1184px){
+    .row-2{
+        display: inline-block;
+    }
+    .row-2 .alt{
+        display: inline-block;
+    }
+    .content{
+        height: auto;
+        margin-top: 140px;
+    }
+    .header{
+        display: block;
+    }
+    .list{
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+    }
+}
+@media screen and (max-width: 960px){
+    .list{
+        bottom: 0px;
+        margin: 0;
+        padding: 10px;
+        position: fixed;
+        background-color: #fff;
+    }
+    .recent{
+        display: none;
+    }
+    .content{
+        margin-bottom: 100px;
+        margin-top: 85px;
+    }
+}
