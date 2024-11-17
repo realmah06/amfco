@@ -498,6 +498,10 @@
             <label for="address">Address</label>
             <textarea name="customer_address" id="customer_address" placeholder="Address"></textarea>
         </div>
+         <div class="form-group" style="width: 100%;">
+              <label for="customer_photo">Customer Photo</label>
+              <input type="file" name="customer_photo" id="customer_photo">
+         </div>
         <div class="form-group" style="width: 100%;">
             <label for="credit_limit">Customer Balance</label>
             <input type="text" name="credit_limit" id="credit_limit" placeholder="Balance" style="width: 92%;">
@@ -673,6 +677,7 @@ function updateCustomer() {
         customer.address = document.getElementById('customer_address').value;
         customer.creditLimit = document.getElementById('credit_limit').value;
         customer.phone = document.getElementById('phone_number').value;
+        customer.photo = document.getElementById('customer_phto').value;
         saveToLocalStorage();
         updateCustomerSelect();
         updateCustomerList();
@@ -757,6 +762,7 @@ function clearForm() {
     document.getElementById('credit_limit').value = '';
     document.getElementById('phone_number').value = '';
     document.getElementById('customer_select').value = '';
+     document.getElementById('customer_photo').value = '';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
