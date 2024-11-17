@@ -174,9 +174,6 @@ body{
     }
 }
 @media screen and (max-width: 960px){
-    .list{
-        
-    }
     .hidden{
         display: block;
     }
@@ -185,7 +182,7 @@ body{
     }
     .content{
         margin-bottom: 100px;
-        margin-top: 85px;
+        margin-top: 185px;
     }
     .alt{
         width: 100%;
