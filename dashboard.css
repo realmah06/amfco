@@ -177,6 +177,9 @@ body{
     .list{
         display: none;
     }
+    .hidden{
+        display: block;
+    }
     .recent{
         display: none;
     }
