@@ -3,6 +3,9 @@
     padding: 0;
     font-family: "Host Grotesk", sans-serif;
 }
+body{
+    background-color: rgb(237, 246, 247);
+}
 .header{
     display: flex;
     align-items: center;
