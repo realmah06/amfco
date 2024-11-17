@@ -651,7 +651,7 @@ function updateCustomerList() {
     customerList.innerHTML = '';
     customers.forEach((customer) => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = `${customer.name}  <small><em>(${customer.address})</em></small>  <span>${customer.phone}</span>`;
+        listItem.innerHTML = `${customer.photo} &nbsp; ${customer.name}  <small><em>(${customer.address})</em></small>  <span>${customer.phone}</span>`;
         customerList.appendChild(listItem);
     });
 }
