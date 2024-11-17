@@ -181,7 +181,10 @@ body{
         display: none;
     }
     .header .list li span{
-    font-size: 30px;
+        font-size: 27px;
+    }
+    .header .list li{
+        margin: 0;
     }
     .alt{
         width: 100%;
