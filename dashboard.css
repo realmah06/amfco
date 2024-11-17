@@ -7,7 +7,6 @@ body{
     background-color: rgb(237, 246, 247);
 }
 .header{
-    display: flex;
     align-items: center;
     justify-content: space-around;
     border-bottom: 1px solid #ddd;
