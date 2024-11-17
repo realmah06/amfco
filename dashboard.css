@@ -172,12 +172,7 @@ body{
 }
 @media screen and (max-width: 960px){
     .list{
-        right: 10px;
-        top: 100px;
-        position: fixed;
-    }
-    .list li{
-        display: inline-block;
+        display: none;
     }
     .recent{
         display: none;
