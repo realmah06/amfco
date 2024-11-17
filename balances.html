@@ -321,16 +321,10 @@
                     <div class="sort">
                         <p>Sort By: -- -- -- </p>
                     </div>
-                    <button>Add Customer</button>
+                    <button onclick="openPopup(2)">Add Customer</button>
                 </div>
                 <br>
-                <ul id="customer-list">
-                <li><span class="icon"><img src="a a mujaheed.jpg" alt="a a mujaheed" height="25"></span> &nbsp;&nbsp;1. A.A Mujaheed Global Enterprises <small style="color: #6d6b6b;font-style: italic;"><em>(No C3 Al-ameen Shopping Mall Ltd)</em></small> <span style="color: red;float: right;">-₦340</span></li>
-                <li><span class="icon"><img src="logo 1.png" alt="amfco" height="25"></span> &nbsp;&nbsp;2. Amfco Fertilizer & Chemicals Ltd <small style="color: #6d6b6b;font-style: italic;"><em>(Company Expenses)</em></small> <span style="color: red;float: right;">-₦68.4</span></li>
-                <li><span class="icon"><img src="logo 1.png" alt="amfco" height="25"></span> &nbsp;&nbsp;3. Amfco Fertilizer & Chemicals Ltd <small style="color: #6d6b6b;font-style: italic;"><em>(CEO Expenses)</em></small> <span style="color: green;float: right;">₦68,000.4</span></li>
-                <li><span class="icon"><img src="haqqy.jpg" alt="haqqy" height="25"></span> &nbsp;&nbsp;4. HAQQY Integrated Services <small style="color: #6d6b6b;font-style: italic;"><em>(No C3 Al-ameen Shopping Mall Ltd)</em></small> <span style="color: green;float: right;">₦54.4</span></li>
-                <li><span class="icon"><img src="iadr.jpg" alt="iadr" height="25"></span> &nbsp;&nbsp;5. IADR Zaria Investment Limited <small style="color: #6d6b6b;font-style: italic;"><em>(No 18 Park road pz, zaria)</em></small> <span style="color: green;float: right;">₦6.4</span></li>
-                </ul>
+                <ul class="balances-appear" id="customer_list"></ul>
             </div>
           </div>
           <br><br>
@@ -439,6 +433,10 @@
         <div class="form-group" style="width: 100%;">
             <label for="customer_name">Customer Name</label>
             <input type="text" name="customer_name" id="customer_name" placeholder="Customer Name" style="width: 92%;">
+        </div>
+        <div class="form-group">
+            <label for="photo">Photo</label>
+            <input type="file" id="logost">
         </div>
         <div class="form-group" style="width: 100%;">
             <label for="address">Address</label>
@@ -835,6 +833,7 @@
 <button type="button" id="profit_button" class="post-btn">Save</button>
 </div>
     <script src="js/balances.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     function filterSuppliers() {
     const searchInput = document.getElementById('search_supplier').value.toLowerCase();
@@ -905,6 +904,173 @@ function filterAsset(){
         percentage.style.display = text.includes(search_input) ? '' : 'none';
     })
 }
+
+    // Open and close functions for each popup
+function openPopup(number) {
+    document.getElementById('popup' + number).style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closePopup(number) {
+    document.getElementById('popup' + number).style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+    // Customer Handle //
+    const customerSelectTemplate = document.createElement('select');
+customerSelectTemplate.id = 'customer_select';
+customerSelectTemplate.innerHTML = '<option value="">-- Select Customer --</option>';
+
+const saveButton = document.getElementById('save_button');
+const customerList = document.getElementById('customer_list');
+let customers = JSON.parse(localStorage.getItem('customers')) || [];
+
+function saveToLocalStorage() {
+    localStorage.setItem('customers', JSON.stringify(customers));
+}
+
+function updateCustomerSelect() {
+    customerSelectTemplate.innerHTML = '<option value="">-- Select Customer --</option>';
+    customers.forEach((customer, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = customer.name;
+        customerSelectTemplate.appendChild(option);
+    });
+}
+
+function addCustomerSelect(containerId) {
+    const container = document.getElementById(containerId);
+    if (container) {
+        const newSelect = customerSelectTemplate.cloneNode(true);
+        container.innerHTML = ''; // Clear previous content
+        container.appendChild(newSelect);
+    }
+}
+
+function updateCustomerList() {
+    customerList.innerHTML = '';
+    customers.forEach((customer) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${customer.name} - ${customer.phone}`;
+        customerList.appendChild(listItem);
+    });
+}
+
+function addCustomer() {
+    const customer = {
+        name: document.getElementById('customer_name').value,
+        address: document.getElementById('customer_address').value,
+        creditLimit: document.getElementById('credit_limit').value,
+        phone: document.getElementById('phone_number').value
+    };
+    customers.push(customer);
+    saveToLocalStorage();
+    updateCustomerSelect();
+    updateCustomerList();
+}
+
+function updateCustomer() {
+    const selectedIndex = document.getElementById('customer_select').value;
+    if (selectedIndex !== "") {
+        const customer = customers[selectedIndex];
+        customer.name = document.getElementById('customer_name').value;
+        customer.address = document.getElementById('customer_address').value;
+        customer.creditLimit = document.getElementById('credit_limit').value;
+        customer.phone = document.getElementById('phone_number').value;
+        
+        saveToLocalStorage();
+        updateCustomerSelect();
+        updateCustomerList();
+    }
+}
+
+function deleteCustomer() {
+    const selectedIndex = document.getElementById('customer_select').value;
+    if (selectedIndex !== "") {
+        customers.splice(selectedIndex, 1);
+        saveToLocalStorage();
+        updateCustomerSelect();
+        updateCustomerList();
+    }
+}
+
+saveButton.addEventListener('click', () => {
+    const action = document.querySelector('input[name="action"]:checked').value;
+
+    if (action === 'add') {
+        Swal.fire({
+            title: 'Add Customer?',
+            text: "Are you sure you want to add this customer?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, add it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                addCustomer();
+                Swal.fire('Added!', 'Customer has been added.', 'success');
+                clearForm();
+            }
+        });
+    } else if (action === 'update') {
+        if (document.getElementById('customer_select').value) {
+            Swal.fire({
+                title: 'Update Customer?',
+                text: "Are you sure you want to update this customer's details?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    updateCustomer();
+                    Swal.fire('Updated!', 'Customer details have been updated.', 'success');
+                    clearForm();
+                }
+            });
+        } else {
+            Swal.fire('Select Customer', 'Please select a customer to update.', 'info');
+        }
+    } else if (action === 'delete') {
+        if (document.getElementById('customer_select').value) {
+            Swal.fire({
+                title: 'Delete Customer?',
+                text: "Are you sure you want to delete this customer?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteCustomer();
+                    Swal.fire('Deleted!', 'Customer has been deleted.', 'success');
+                    clearForm();
+                }
+            });
+        } else {
+            Swal.fire('Select Customer', 'Please select a customer to delete.', 'info');
+        }
+    }
+});
+
+function clearForm() {
+    document.getElementById('customer_name').value = '';
+    document.getElementById('customer_address').value = '';
+    document.getElementById('credit_limit').value = '';
+    document.getElementById('phone_number').value = '';
+    document.getElementById('customer_select').value = '';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateCustomerSelect();
+    updateCustomerList();
+    addCustomerSelect('customer_select_container');  // Main form dropdown
+    addCustomerSelect('adjustment_customer_select');
+});
 
       // Profit Handle //
 
