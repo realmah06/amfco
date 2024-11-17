@@ -19,7 +19,7 @@ body{
     width: 700px;
 }
 .login-container .brand{
-    display: flex;
+    display: inline-block;
     align-items: center;
 }
 .login-container .brand img{
