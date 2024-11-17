@@ -175,7 +175,7 @@ body{
 }
 @media screen and (max-width: 960px){
     .list{
-        display: none;
+        
     }
     .hidden{
         display: block;
