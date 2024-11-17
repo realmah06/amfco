@@ -101,7 +101,7 @@
 .modal li{
     list-style: none;
     padding: 10px;
-    margin-left: 30px;
+    margin-left: 10px;
     width: 90%;
     font-size: 20px;
     margin-bottom: 7px;
@@ -640,7 +640,7 @@ function updateCustomerList() {
     customerList.innerHTML = '';
     customers.forEach((customer) => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${customer.name} - ${customer.phone}`;
+        listItem.textContent = `${customer.name} - <small><em>${customer.address}</em></small> - ${customer.phone}`;
         customerList.appendChild(listItem);
     });
 }
