@@ -188,7 +188,9 @@ body{
     }
     .alt{
         width: 100%;
-        margin: 0;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 12px;
     }
     .header img{
         height: 70px;
