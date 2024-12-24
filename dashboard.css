@@ -156,6 +156,9 @@ body{
     .image{
         display: none;
     }
+    .header .list li span{
+        font-size: 22px;
+    }
        .row-2{
         display: inline-block;
     }
@@ -184,9 +187,7 @@ body{
     .recent{
         display: none;
     }
-    .header .list li span{
-        font-size: 22px;
-    }
+    
     .header .list li{
         margin: 0;
     }
